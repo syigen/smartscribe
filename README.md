@@ -1,46 +1,55 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# SmartScribe
 
-## Available Scripts
+SmartScribe is a React-based WYSIWYG text editor component that 
+provides context-based suggestions as you type.
 
-In the project directory, you can run:
+## Installation
 
-### `npm start`
+You can install the SmartScribe library using npm:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```sh
+npm install smart-scribe
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Features
 
-### `npm test`
+- Customizable placeholder text
+- Context-based suggestions
+- Easy to use React component
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
 
-### `npm run build`
+Here's a simple example of how to use the SmartScribe component in your application:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```tsx
+import React from 'react';
+import SmartScribe from 'smart-scribe';
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+const App: React.FC = () => {
+    const handleType = (text: string) => {
+        console.log('Updated content:', text);
+    };
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    const getSuggestion = (text: string) => {
+        // Return a context-based suggestion based on the text
+        return "suggestion";
+    };
 
-### `npm run eject`
+    return (
+        <div className="App">
+            <SmartScribe
+                placeholder="Type here..."
+                onType={handleType}
+                getSuggestion={getSuggestion}
+            />
+        </div>
+    );
+};
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+export default App;
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## License
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
