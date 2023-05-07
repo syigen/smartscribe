@@ -1,9 +1,9 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
-interface TextAreaProps {
+interface SmartScribeProps {
 }
 
-const TextArea = ({}: TextAreaProps) => {
+const SmartScribe = ({}: SmartScribeProps) => {
     const [content, setContent] = useState('');
     const contentEditableRef = useRef<HTMLDivElement | null>(null);
     const suggestionRef = useRef<HTMLSpanElement | null>(null);
@@ -27,9 +27,8 @@ const TextArea = ({}: TextAreaProps) => {
         }
     };
 
-
     const getSuggestion = (content: string) => {
-        return "suggestion"
+        return "suggestion";
     };
 
     const suggestion = getSuggestion(content);
@@ -68,4 +67,4 @@ const TextArea = ({}: TextAreaProps) => {
     );
 };
 
-export default TextArea;
+export default SmartScribe;
