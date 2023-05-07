@@ -1,16 +1,23 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 
 interface SmartScribeProps {
+    placeholder?: string;
+    onType?: (text: string) => void;
+    getSuggestion?: (text: string) => string;
 }
 
-const SmartScribe = ({}: SmartScribeProps) => {
+const SmartScribe: React.FC<SmartScribeProps> = ({placeholder, onType, getSuggestion = () => ""}) => {
     const [content, setContent] = useState('');
     const contentEditableRef = useRef<HTMLDivElement | null>(null);
     const suggestionRef = useRef<HTMLSpanElement | null>(null);
 
     const handleInput = () => {
         if (contentEditableRef.current) {
-            setContent(contentEditableRef.current.textContent || '');
+            const text = contentEditableRef.current.textContent || '';
+            setContent(text);
+            if (onType) {
+                onType(text);
+            }
         }
     };
 
@@ -27,11 +34,13 @@ const SmartScribe = ({}: SmartScribeProps) => {
         }
     };
 
-    const getSuggestion = (content: string) => {
-        return "suggestion";
-    };
+    useEffect(() => {
+        if (contentEditableRef.current && placeholder) {
+            contentEditableRef.current.setAttribute('data-placeholder', placeholder);
+        }
+    }, [placeholder]);
 
-    const suggestion = getSuggestion(content);
+    const suggestionText = getSuggestion(content);
 
     return (
         <>
@@ -51,7 +60,7 @@ const SmartScribe = ({}: SmartScribeProps) => {
                     position: 'relative'
                 }}
             />
-            {suggestion && (
+            {suggestionText && (
                 <span
                     ref={suggestionRef}
                     style={{
@@ -60,7 +69,7 @@ const SmartScribe = ({}: SmartScribeProps) => {
                         color: '#ccc'
                     }}
                 >
-                    {suggestion}
+                    {suggestionText}
                 </span>
             )}
         </>
